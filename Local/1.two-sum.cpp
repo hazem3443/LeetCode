@@ -34,3 +34,17 @@ public:
     }
 };
 // @lc code=end
+
+int main()
+{
+    Solution sol;
+    std::vector<int> nums = {2, 7, 11, 15};
+    std::vector<int> result = sol.twoSum(nums, 9);
+    for (auto it = result.begin(); it != result.end(); it++)
+    {
+        std::cout << *it << std::endl;
+    }
+    // cout result
+
+    return 0;
+}

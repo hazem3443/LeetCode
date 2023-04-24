@@ -5,18 +5,25 @@
  */
 
 // @lc code=start
-class Solution {
+class Solution
+{
 public:
-    int mySqrt(int x) {
-        if (x == 0) {
+    int mySqrt(int x)
+    {
+        if (x == 0)
+        {
             return 0;
         }
         int left = 1, right = x;
-        while (left <= right) {
+        while (left <= right)
+        {
             int mid = left + (right - left) / 2;
-            if (mid <= x / mid) {
+            if (mid <= x / mid)
+            {
                 left = mid + 1;
-            } else {
+            }
+            else
+            {
                 right = mid - 1;
             }
         }
@@ -24,4 +31,3 @@ public:
     }
 };
 // @lc code=end
-

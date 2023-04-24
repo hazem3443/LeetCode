@@ -5,6 +5,12 @@ public:
 
         bool boolres = true;
 
+        std::map<char, char> cases = {
+            {')', '('},
+            {']', '['},
+            {'}', '{'}
+        };
+
         for(const auto &ch: s)
         {
             switch (ch)
@@ -20,28 +26,10 @@ public:
                 if(braces.size()==0)
                     return 0;
                 else{
-                    switch (ch)
-                    {
-                        case ')':
-                            boolres &= (braces.back() == '(');
-                            braces.pop_back();
-                            break;
-                        case ']':
-                            boolres &= (braces.back() == '[');
-                            braces.pop_back();
-                            break;
-                        case '}':
-                            boolres &= (braces.back() == '{');
-                            braces.pop_back();
-                            break;
-                        default:
-                            break;
-                    }
-
+                    boolres &= (braces.back() == cases[ch] );
+                    braces.pop_back();
+                    break;
                 }
-
-                break;
-            default:
                 break;
             }
         }

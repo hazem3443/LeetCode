@@ -4,6 +4,13 @@ public:
         std::vector<char> braces;
 
         bool boolres = true;
+
+        std::map<char, char> cases = {
+            {')', '('},
+            {']', '['},
+            {'}', '{'}
+        };
+
         for(const auto &ch: s)
         {
             switch (ch)
@@ -19,7 +26,7 @@ public:
                 if(braces.size()==0)
                     return 0;
                 else{
-                    boolres &= (braces.back() == ((ch==')')?'(':((ch==']')?'[':((ch=='}')?'{':NULL) ) ) );
+                    boolres &= (braces.back() == cases[ch]);//((ch==')')?'(':((ch==']')?'[':((ch=='}')?'{':NULL) ) ) );
                     braces.pop_back();
                     break;
                 }

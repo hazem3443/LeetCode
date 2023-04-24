@@ -5,6 +5,11 @@ public:
 
         bool boolres = true;
 
+        char cases[256];
+        cases[')'] = '(';
+        cases[']'] = '[';
+        cases['}'] = '{';
+
         for(const auto &ch: s)
         {
             switch (ch)
@@ -20,28 +25,10 @@ public:
                 if(braces.size()==0)
                     return 0;
                 else{
-                    switch (ch)
-                    {
-                        case ')':
-                            boolres &= (braces.back() == '(');
-                            braces.pop_back();
-                            break;
-                        case ']':
-                            boolres &= (braces.back() == '[');
-                            braces.pop_back();
-                            break;
-                        case '}':
-                            boolres &= (braces.back() == '{');
-                            braces.pop_back();
-                            break;
-                        default:
-                            break;
-                    }
-
+                    boolres &= (braces.back() == cases[ch]);//((ch==')')?'(':((ch==']')?'[':((ch=='}')?'{':NULL) ) ) );
+                    braces.pop_back();
+                    break;
                 }
-
-                break;
-            default:
                 break;
             }
         }

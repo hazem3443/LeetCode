@@ -8,79 +8,95 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
-class Solution {
+class Solution
+{
 public:
-    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
-       ListNode *resListHead = nullptr; // holdthe head ele
+    ListNode *mergeTwoLists(ListNode *list1, ListNode *list2)
+    {
+        ListNode *resListHead = nullptr; // holdthe head ele
         ListNode *curCur = nullptr;
-        ListNode *list1Cur = list1;
-        ListNode *list2Cur = list2;
-        
-        while ((list1Cur != nullptr) && (list2Cur != nullptr))
+
+        while ((list1 != nullptr) || (list2 != nullptr))
         {
-            if (list1Cur->val <= list2Cur->val)
+            switch (((list2 != nullptr) << 1) | (list1 != nullptr))
             {
-                // create the node
-                if (curCur == nullptr)
+            case 0:
+                /* both null */
+                break;
+            case 1:
+                /* 1 null */
+                while (list1 != nullptr)
                 {
-                    resListHead = new ListNode(list1Cur->val);
-                    curCur = resListHead;
+                    if (curCur == nullptr)
+                    {
+                        resListHead = new ListNode(list1->val);
+                        curCur = resListHead;
+                    }
+                    else
+                    {
+                        curCur->next = new ListNode(list1->val);
+                        curCur = curCur->next;
+                    }
+                    list1 = list1->next;
+                }
+                break;
+            case 2:
+                /* 2 is null */
+                while (list2 != nullptr)
+                {
+                    if (curCur == nullptr)
+                    {
+                        resListHead = new ListNode(list2->val);
+                        curCur = resListHead;
+                    }
+                    else
+                    {
+                        curCur->next = new ListNode(list2->val);
+                        curCur = curCur->next;
+                    }
+                    list2 = list2->next;
+                }
+                break;
+            case 3:
+                /* both not null */
+                if (list1->val <= list2->val)
+                {
+                    // create the node
+                    if (curCur == nullptr)
+                    {
+                        resListHead = new ListNode(list1->val);
+                        curCur = resListHead;
+                    }
+                    else
+                    {
+                        curCur->next = new ListNode(list1->val);
+                        curCur = curCur->next;
+                    }
+                    list1 = list1->next;
                 }
                 else
                 {
-                    curCur->next = new ListNode(list1Cur->val);
-                    curCur = curCur->next;
+                    if (curCur == nullptr)
+                    {
+                        resListHead = new ListNode(list2->val);
+                        curCur = resListHead;
+                    }
+                    else
+                    {
+                        curCur->next = new ListNode(list2->val);
+                        curCur = curCur->next;
+                    }
+                    list2 = list2->next;
                 }
-                list1Cur = list1Cur->next;
+                break;
+            default:
+                break;
             }
-            else
-            {
-                if (curCur == nullptr)
-                {
-                    resListHead = new ListNode(list2Cur->val);
-                    curCur = resListHead;
-                }
-                else
-                {
-                    curCur->next = new ListNode(list2Cur->val);
-                    curCur = curCur->next;
-                }
-                list2Cur = list2Cur->next;
-            }
-            // std::cout << "list1 val = " << list1Cur->val << std::endl;
-            // std::cout << "list2 val = " << list2Cur->val << std::endl;
-        }
-        while (list1Cur != nullptr)
-        {
-            if (curCur == nullptr)
-            {
-                resListHead = new ListNode(list1Cur->val);
-                curCur = resListHead;
-            }
-            else
-            {
-                curCur->next = new ListNode(list1Cur->val);
-                curCur = curCur->next;
-            }
-            list1Cur = list1Cur->next;
-        }
-        
-        while (list2Cur != nullptr)
-        {
-            if (curCur == nullptr)
-            {
-                resListHead = new ListNode(list2Cur->val);
-                curCur = resListHead;
-            }
-            else
-            {
-                curCur->next = new ListNode(list2Cur->val);
-                curCur = curCur->next;
-            }
-            list2Cur = list2Cur->next;
+
+            // std::cout << "list1 val = " << list1->val << std::endl;
+            // std::cout << "list2 val = " << list2->val << std::endl;
         }
 
-
-        return resListHead; 
-    }
+        return resListHead;
+    } //[]\n[0]
 };
